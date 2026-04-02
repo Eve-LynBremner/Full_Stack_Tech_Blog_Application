@@ -1,0 +1,32 @@
+[
+  {
+    "category_name": "AI & Emerging Tech" 
+  },
+  { 
+    "category_name": "JavaScript" 
+  },
+  { 
+    "category_name": "Node.js" 
+  },
+  { 
+    "category_name": "Databases" 
+  },
+  { 
+    "category_name": "APIs & Architecture" 
+  },
+  { 
+    "category_name": "DevOps & Deployment" 
+  },
+  { 
+    "category_name": "Security" 
+  },
+  { 
+    "category_name": "Frontend Development" 
+  },
+  { 
+    "category_name": "Authentication" 
+  },
+  { 
+    "category_name": "Testing" 
+  }
+]
