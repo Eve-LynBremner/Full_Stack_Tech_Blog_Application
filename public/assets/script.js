@@ -1,6 +1,6 @@
 let token = localStorage.getItem("authToken");
 
-// create a function that fetches all the categories and places each in an option tag, inside the select tag (id=post-category)
+// create a function that fetches all the categories and places each in an option tag for dropdown lists
 function loadCategories(){
   const postCat = document.getElementById("post-category");
   const filterCat = document.getElementById("filter-category");
@@ -12,7 +12,7 @@ function loadCategories(){
     .then((res) => res.json())
     .then((categories) => {
       postCat.innerHTML = "";
-      filterCat.innerHTML = "";
+      filterCat.innerHTML = `<option value="">All</option>`; // include option to select all categories, i.e. no filter
       categories.forEach((category) => {
         const postOption = document.createElement("option");
         postOption.value = category.id;
@@ -98,26 +98,52 @@ function logout() {
 }
 
 function fetchPosts() {
-  fetch("http://localhost:3001/api/posts", {
-    method: "GET",
-    headers: { Authorization: `Bearer ${token}` },
-  })
-    .then((res) => res.json())
-    .then((posts) => {
-      const postsContainer = document.getElementById("posts");
-      postsContainer.innerHTML = "";
-      posts.forEach((post) => {
-        const div = document.createElement("div");
-        div.innerHTML = `<h3>${post.title}</h3><p>${
-          post.content
-        }</p><p>Category: ${
-          post.category.category_name
-        }</p><small>By: ${post.postedBy} on ${new Date(
-          post.createdOn
-        ).toLocaleString()}</small>`;
-        postsContainer.appendChild(div);
+  const filterId = Number(document.getElementById("filter-category").value);
+  if(filterId === 0){
+    fetch("http://localhost:3001/api/posts", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((posts) => {
+        const postsContainer = document.getElementById("posts");
+        postsContainer.innerHTML = "";
+        posts.forEach((post) => {
+          const div = document.createElement("div");
+          div.innerHTML = `<h3>${post.title}</h3><p>${
+            post.content
+          }</p><p>Category: ${
+            post.category.category_name
+          }</p><small>By: ${post.postedBy} on ${new Date(
+            post.createdOn
+          ).toLocaleString()}</small>`;
+          postsContainer.appendChild(div);
+        });
       });
-    });
+    }
+    // update the fetch posts url to include category filter 
+    else{
+      fetch(`http://localhost:3001/api/posts/${filterId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((posts) => {
+          const postsContainer = document.getElementById("posts");
+          postsContainer.innerHTML = "";
+          posts.forEach((post) => {
+            const div = document.createElement("div");
+            div.innerHTML = `<h3>${post.title}</h3><p>${
+              post.content
+            }</p><p>Category: ${
+              post.category.category_name
+            }</p><small>By: ${post.postedBy} on ${new Date(
+              post.createdOn
+            ).toLocaleString()}</small>`;
+            postsContainer.appendChild(div);
+          });
+        });
+    }
 }
 
 function createPost() {
