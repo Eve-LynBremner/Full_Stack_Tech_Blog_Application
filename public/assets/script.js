@@ -1,5 +1,24 @@
 let token = localStorage.getItem("authToken");
 
+// create a function that fetches all the categories and places each in an option tag, inside the select tag (id=post-category)
+function loadCategories(){
+  const dropdown = document.getElementById("post-category");
+  fetch("http://localhost:3001/api/categories", {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  })
+    .then((res) => res.json())
+    .then((categories) => {
+      dropdown.innerHTML = "";
+      categories.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.category_name;
+        dropdown.appendChild(option);
+      });
+    });
+}
+
 function register() {
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
@@ -38,6 +57,9 @@ function login() {
         token = data.token;
 
         alert("User Logged In successfully");
+
+        // load categories for dropdown once logged in
+        loadCategories();
 
         // Fetch the posts list
         fetchPosts();
@@ -80,6 +102,8 @@ function fetchPosts() {
         const div = document.createElement("div");
         div.innerHTML = `<h3>${post.title}</h3><p>${
           post.content
+        }</p><p>Category: ${
+          post.category.category_name
         }</p><small>By: ${post.postedBy} on ${new Date(
           post.createdOn
         ).toLocaleString()}</small>`;
@@ -91,13 +115,16 @@ function fetchPosts() {
 function createPost() {
   const title = document.getElementById("post-title").value;
   const content = document.getElementById("post-content").value;
+  const category = Number(document.getElementById("post-category").value);
+  const author = document.getElementById("post-author").value;
+  
   fetch("http://localhost:3001/api/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ title, content, postedBy: "User" }),
+    body: JSON.stringify({ title, content, postedBy: author, categoryId: category}),
   })
     .then((res) => res.json())
     .then(() => {
