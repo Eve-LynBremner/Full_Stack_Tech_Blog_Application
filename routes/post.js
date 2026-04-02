@@ -32,9 +32,13 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/:id", async (req, res) => {
+// Route to get posts by categoryId
+app.get("/:categoryId", async (req, res) => {
   try {
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findAll({
+      include: ["category"] ,
+      where: { categoryId: req.params.categoryId },
+    });
     res.json(post);
   } catch (error) {
     res.status(500).json({ error: "Error retrieving post" });
