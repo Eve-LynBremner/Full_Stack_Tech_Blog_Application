@@ -2,13 +2,13 @@
 const app = require("express").Router();
 
 // import the models
-const { Post } = require("../models/index");
+const { Post, Category } = require("../models/index");
 
 // Route to add a new post
 app.post("/", async (req, res) => {
   try {
-    const { title, content, postedBy } = req.body;
-    const post = await Post.create({ title, content, postedBy });
+    const { title, content, postedBy, categoryId } = req.body;
+    const post = await Post.create({ title, content, postedBy, categoryId });
 
     res.status(201).json(post);
   } catch (error) {
@@ -19,7 +19,7 @@ app.post("/", async (req, res) => {
 // Route to get all posts
 app.get("/", async (req, res) => {
   try {
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({ include: ["category"] });
 
     res.json(posts);
   } catch (error) {
