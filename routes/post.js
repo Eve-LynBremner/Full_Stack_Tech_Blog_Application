@@ -2,13 +2,18 @@
 const app = require("express").Router();
 
 // import the models
-const { Post, Category } = require("../models/index");
+const { Post } = require("../models/index");
 
-// Route to add a new post
-app.post("/", async (req, res) => {
+const { signToken, authMiddleware } = require("../utils/auth");
+
+const { Sequelize } = require("sequelize");
+
+
+// Route to add a new post - added middleware as need user id info
+app.post("/", authMiddleware, async (req, res) => {
   try {
     const { title, content, postedBy, categoryId } = req.body;
-    const post = await Post.create({ title, content, postedBy, categoryId });
+    const post = await Post.create({ title, content, postedBy, createdOn: new Date(), categoryId, userId: req.user.id});
 
     res.status(201).json(post);
   } catch (error) {
