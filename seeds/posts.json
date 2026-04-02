@@ -4,7 +4,7 @@
     "content": "AI is transforming how we build websites, making development faster and smarter.",
     "postedBy": "John Doe",
     "createdOn": "2024-02-04T12:00:00Z",
-    "category_id": 1,
+    "categoryId": 1,
     "userId": 7
   },
   {
@@ -12,7 +12,7 @@
     "content": "Closures allow functions to retain access to variables even after execution.",
     "postedBy": "Jane Smith",
     "createdOn": "2024-02-03T10:15:00Z",
-    "category_id": 2,
+    "categoryId": 2,
     "userId": 12
   },
   {
@@ -20,7 +20,7 @@
     "content": "Learn how to speed up your Node.js applications with caching and clustering.",
     "postedBy": "Alice Brown",
     "createdOn": "2024-02-02T08:45:00Z",
-    "category_id": 3,
+    "categoryId": 3,
     "userId": 5
   },
   {
@@ -28,7 +28,7 @@
     "content": "Sequelize simplifies working with databases in Node.js.",
     "postedBy": "Bob White",
     "createdOn": "2024-02-01T14:30:00Z",
-    "category_id": 4,
+    "categoryId": 4,
     "userId": 8
   },
   {
@@ -36,7 +36,7 @@
     "content": "Understanding asynchronous JavaScript using async/await.",
     "postedBy": "Charlie Green",
     "createdOn": "2024-01-30T09:00:00Z",
-    "category_id": 2,
+    "categoryId": 2,
     "userId": 3
   },
   {
@@ -44,7 +44,7 @@
     "content": "GraphQL provides a flexible alternative to REST APIs.",
     "postedBy": "Dana Black",
     "createdOn": "2024-01-29T17:00:00Z",
-    "category_id": 5,
+    "categoryId": 5,
     "userId": 14
   },
   {
@@ -52,7 +52,7 @@
     "content": "TypeScript enhances JavaScript by adding static typing.",
     "postedBy": "Ethan Ford",
     "createdOn": "2024-01-28T11:30:00Z",
-    "category_id": 2,
+    "categoryId": 2,
     "userId": 12
   },
   {
@@ -60,7 +60,7 @@
     "content": "A guide to creating scalable RESTful APIs using Express.js.",
     "postedBy": "Fiona Blue",
     "createdOn": "2024-01-27T15:45:00Z",
-    "category_id": 5,
+    "categoryId": 5,
     "userId": 4
   },
   {
@@ -68,7 +68,7 @@
     "content": "Learn how to containerize your Node.js app with Docker.",
     "postedBy": "George Red",
     "createdOn": "2024-01-26T08:20:00Z",
-    "category_id": 6,
+    "categoryId": 6,
     "userId": 9
   },
   {
@@ -76,7 +76,7 @@
     "content": "Implement security best practices for your Node.js apps.",
     "postedBy": "Hannah Yellow",
     "createdOn": "2024-01-25T13:10:00Z",
-    "category_id": 7,
+    "categoryId": 7,
     "userId": 7
   },
   {
@@ -84,7 +84,7 @@
     "content": "Understand and implement React Hooks for state and effects.",
     "postedBy": "Ian Silver",
     "createdOn": "2024-01-24T10:55:00Z",
-    "category_id": 8,
+    "categoryId": 8,
     "userId": 15
   },
   {
@@ -92,7 +92,7 @@
     "content": "Exploring serverless computing and how it reduces costs.",
     "postedBy": "Julia Gold",
     "createdOn": "2024-01-23T18:25:00Z",
-    "category_id": 6,
+    "categoryId": 6,
     "userId": 9
   },
   {
@@ -100,7 +100,7 @@
     "content": "Understanding real-time communication with WebSockets.",
     "postedBy": "Kevin Brown",
     "createdOn": "2024-01-22T07:40:00Z",
-    "category_id": 5,
+    "categoryId": 5,
     "userId": 11
   },
   {
@@ -108,7 +108,7 @@
     "content": "Use Node.js for task automation with scripts and schedulers.",
     "postedBy": "Lara White",
     "createdOn": "2024-01-21T16:50:00Z",
-    "category_id": 3,
+    "categoryId": 3,
     "userId": 5
   },
   {
@@ -116,7 +116,7 @@
     "content": "Learn how to perform advanced queries with MongoDB.",
     "postedBy": "Mike Gray",
     "createdOn": "2024-01-20T12:35:00Z",
-    "category_id": 4,
+    "categoryId": 4,
     "userId": 8
   },
   {
@@ -124,7 +124,7 @@
     "content": "Next.js enhances React with server-side rendering and SEO.",
     "postedBy": "Nina Purple",
     "createdOn": "2024-01-19T14:20:00Z",
-    "category_id": 8,
+    "categoryId": 8,
     "userId": 15
   },
   {
@@ -132,7 +132,7 @@
     "content": "OAuth 2.0 is a secure authorization framework for web apps.",
     "postedBy": "Oscar Blue",
     "createdOn": "2024-01-18T09:45:00Z",
-    "category_id": 9,
+    "categoryId": 9,
     "userId": 7
   },
   {
@@ -140,7 +140,7 @@
     "content": "Learn about Jest, Mocha, and other testing frameworks.",
     "postedBy": "Paula Pink",
     "createdOn": "2024-01-17T11:15:00Z",
-    "category_id": 10,
+    "categoryId": 10,
     "userId": 2
   },
   {
@@ -148,7 +148,7 @@
     "content": "Techniques to handle high traffic with Node.js efficiently.",
     "postedBy": "Quinn Orange",
     "createdOn": "2024-01-16T15:05:00Z",
-    "category_id": 3,
+    "categoryId": 3,
     "userId": 5
   },
   {
@@ -156,7 +156,7 @@
     "content": "Learn how to automate deployments using AWS and CI/CD pipelines.",
     "postedBy": "Ryan Green",
     "createdOn": "2024-01-15T08:50:00Z",
-    "category_id": 6,
+    "categoryId": 6,
     "userId": 9
   }
 ]
