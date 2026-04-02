@@ -6,6 +6,11 @@ class Post extends Model {}
 
 Post.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     title: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -22,6 +27,13 @@ Post.init(
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.NOW,
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "category",
+        key: "id",
+      },
     },
   },
   {
