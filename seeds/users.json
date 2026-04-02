@@ -1,0 +1,92 @@
+[
+    {
+      "username": "techguru01",
+      "email": "techguru01@example.com",
+      "password": "password123"
+    },
+    {
+      "username": "coder123",
+      "email": "coder123@example.com",
+      "password": "securePass99"
+    },
+    {
+      "username": "devmaster",
+      "email": "devmaster@example.com",
+      "password": "codeMaster88"
+    },
+    {
+      "username": "frontendpro",
+      "email": "frontendpro@example.com",
+      "password": "frontendDev!"
+    },
+    {
+      "username": "backendboss",
+      "email": "backendboss@example.com",
+      "password": "secureBackend1"
+    },
+    {
+      "username": "networkadmin",
+      "email": "networkadmin@example.com",
+      "password": "routerSwitch88"
+    },
+    {
+      "username": "securitychamp",
+      "email": "securitychamp@example.com",
+      "password": "firewallSecure!"
+    },
+    {
+      "username": "datasensei",
+      "email": "datasensei@example.com",
+      "password": "analyticsPro99"
+    },
+    {
+      "username": "cloudarchitect",
+      "email": "cloudarchitect@example.com",
+      "password": "AWSarchitect88"
+    },
+    {
+      "username": "pythonlover",
+      "email": "pythonlover@example.com",
+      "password": "snakeCode101"
+    },
+    {
+      "username": "javaprogrammer",
+      "email": "javaprogrammer@example.com",
+      "password": "JavaRocks999"
+    },
+    {
+      "username": "javascriptninja",
+      "email": "javascriptninja@example.com",
+      "password": "jsMaster007"
+    },
+    {
+      "username": "ethicalpen",
+      "email": "ethicalpen@example.com",
+      "password": "pentestSecure!"
+    },
+    {
+      "username": "backendpro",
+      "email": "backendpro@example.com",
+      "password": "nodeDjango99"
+    },
+    {
+      "username": "frontendwiz",
+      "email": "frontendwiz@example.com",
+      "password": "reactVueMaster"
+    },
+    {
+      "username": "cryptodev",
+      "email": "cryptodev@example.com",
+      "password": "secureHashing77"
+    },
+    {
+      "username": "webdesigner",
+      "email": "webdesigner@example.com",
+      "password": "cssHtmlFigma"
+    },
+    {
+      "username": "softwareengineer",
+      "email": "softwareengineer@example.com",
+      "password": "softwareDev88"
+    }
+  ]
