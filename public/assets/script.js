@@ -2,19 +2,27 @@ let token = localStorage.getItem("authToken");
 
 // create a function that fetches all the categories and places each in an option tag, inside the select tag (id=post-category)
 function loadCategories(){
-  const dropdown = document.getElementById("post-category");
+  const postCat = document.getElementById("post-category");
+  const filterCat = document.getElementById("filter-category");
+
   fetch("http://localhost:3001/api/categories", {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   })
     .then((res) => res.json())
     .then((categories) => {
-      dropdown.innerHTML = "";
+      postCat.innerHTML = "";
+      filterCat.innerHTML = "";
       categories.forEach((category) => {
-        const option = document.createElement("option");
-        option.value = category.id;
-        option.textContent = category.category_name;
-        dropdown.appendChild(option);
+        const postOption = document.createElement("option");
+        postOption.value = category.id;
+        postOption.textContent = category.category_name;
+        postCat.appendChild(postOption);
+
+        const filteroption = document.createElement("option");
+        filteroption.value = category.id;
+        filteroption.textContent = category.category_name;
+        filterCat.appendChild(filteroption);
       });
     });
 }
