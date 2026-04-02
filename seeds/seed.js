@@ -17,7 +17,10 @@ const userData = require("./users.json");
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-  await User.bulkCreate(userData);
+    await User.bulkCreate(userData, {
+    // There are hooks in user model that are hashing passwords, so need this to store hashed passwords (not actual passwords). Don't need to hash again here.
+    individualHooks: true, 
+  });
 
   await Category.bulkCreate(categoryData);
 
