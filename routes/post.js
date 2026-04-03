@@ -24,8 +24,8 @@ app.post("/", authMiddleware, async (req, res) => {
 // Route to get all posts
 app.get("/", async (req, res) => {
   try {
-    const posts = await Post.findAll({ include: ["category"] });
-
+    // include category and user because we reference their properties in script.js
+    const posts = await Post.findAll({ include: ["category", "user"] }); 
     res.json(posts);
   } catch (error) {
     res.status(500).json({ error: "Error retrieving posts", error });
@@ -35,8 +35,9 @@ app.get("/", async (req, res) => {
 // Route to get posts by categoryId
 app.get("/:categoryId", async (req, res) => {
   try {
+    // include category and user because we reference their properties in script.js
     const post = await Post.findAll({
-      include: ["category"] ,
+      include: ["category" , "user"] ,
       where: { categoryId: req.params.categoryId },
     });
     res.json(post);
