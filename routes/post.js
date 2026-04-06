@@ -47,11 +47,11 @@ app.get("/:categoryId", async (req, res) => {
 });
 
 // Route to update a post
-app.put("/:id", async (req, res) => {
+app.put("/:id", authMiddleware, async (req, res) => {
   try {
-    const { title, content, postedBy } = req.body;
+    const { title, content, postedBy, categoryId } = req.body;
     const post = await Post.update(
-      { title, content, postedBy },
+      { title, content, postedBy, categoryId },
       { where: { id: req.params.id } }
     );
     res.json(post);
@@ -61,7 +61,7 @@ app.put("/:id", async (req, res) => {
 });
 
 // Route to delete a post
-app.delete("/:id", async (req, res) => {
+app.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const post = await Post.destroy({ where: { id: req.params.id } });
     res.json(post);
