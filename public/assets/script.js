@@ -42,6 +42,9 @@ function register() {
       if (data.errors) {
         alert(data.errors[0].message);
       } else {
+        document.getElementById("username").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
         alert("User registered successfully");
       }
     })
@@ -176,6 +179,11 @@ function createPost() {
   const content = document.getElementById("post-content").value;
   const category = Number(document.getElementById("post-category").value);
   const author = document.getElementById("post-author").value;
+
+  if(!title || !content || !category || !author){
+    alert("Please complete all fields to submit post");
+    return
+  }
   
   fetch("http://localhost:3001/api/posts", {
     method: "POST",
