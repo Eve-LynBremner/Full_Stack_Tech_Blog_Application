@@ -1,6 +1,6 @@
 # Full Stack Tech Blog Application
 
-This application offers user-authenticated access to a Tech Blog. Once logged in, users can create, update, and delete their blogs. They can also browse and filter blog posts by category.
+This is a full‑stack Tech Blog application featuring a MySQL database, and API calls from a web page. This application includes user authentication and supports CRUD functionality.
 
 ## Installation
 
