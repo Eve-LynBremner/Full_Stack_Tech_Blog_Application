@@ -1,6 +1,6 @@
 let token = localStorage.getItem("authToken");
 
-// create a function that fetches all the categories and places each in an option tag for dropdown lists
+// create a function that fetches all the categories and places each in an option tag for the 2 dropdown lists
 function loadCategories(){
   const postCat = document.getElementById("post-category");
   const filterCat = document.getElementById("filter-category");
@@ -110,13 +110,15 @@ function fetchPosts() {
         postsContainer.innerHTML = "";
         posts.forEach((post) => {
           const div = document.createElement("div");
-          div.innerHTML = `<h3>${post.title}</h3><p>${
-            post.content
-          }</p><p>Category: ${
-            post.category.category_name
-          }</p><small>By: ${post.postedBy} on ${new Date(
-            post.createdOn
-          ).toLocaleString()}</small>`;
+          div.innerHTML = 
+          `<h3>${post.title}</h3>
+          <p>${post.content}</p>
+          <p>Category: ${post.category.category_name}</p>
+          <small>By: ${post.postedBy} on ${new Date(post.createdOn).toLocaleString()}</small>
+          <div id="post-buttons">
+            <button onclick="deletePost()" id="deleteButton">Delete</button>
+            <button onclick="updatePost()" id="updateButton">Update</button>
+          </div>`;
           postsContainer.appendChild(div);
         });
       });
