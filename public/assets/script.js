@@ -8,7 +8,6 @@ function loadCategories(){
 
   fetch("http://localhost:3001/api/categories", {
     method: "GET",
-    headers: { Authorization: `Bearer ${token}` },
   })
     .then((res) => res.json())
     .then((categories) => {
@@ -116,7 +115,6 @@ function fetchPosts() {
     if(filterId === 0){
       fetch("http://localhost:3001/api/posts", {
         method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
         .then((posts) => {
@@ -146,7 +144,6 @@ function fetchPosts() {
     else{
       fetch(`http://localhost:3001/api/posts/${filterId}`, {
         method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
         .then((posts) => {
@@ -200,5 +197,44 @@ function createPost() {
       document.getElementById("post-title").value = "";
       document.getElementById("post-content").value = "";
       document.getElementById("post-author").value = "";
+    });
+}
+
+function deletePost(postId) {
+  fetch(`http://localhost:3001/api/posts/${postId}`, {
+    method: "DELETE",
+    headers: {Authorization: `Bearer ${token}`},
+  })
+    .then((res) => res.json())
+    .then(() => {
+      alert("Post deleted successfully");
+      fetchPosts();
+    });
+}
+
+
+function updatePost(postId) {
+  const title = document.getElementById("post-title").value;
+  const content = document.getElementById("post-content").value;
+  const category = Number(document.getElementById("post-category").value);
+  const author = document.getElementById("post-author").value;
+
+  if(!title || !content || !category || !author){
+    alert("Please complete all fields to update post");
+    return
+  }
+  
+  fetch(`http://localhost:3001/api/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ title, content, postedBy: author, categoryId: category}),
+  })
+    .then((res) => res.json())
+    .then(() => {
+      alert("Post updated successfully");
+      fetchPosts();
     });
 }
