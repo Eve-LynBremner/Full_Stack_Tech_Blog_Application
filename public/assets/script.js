@@ -164,5 +164,8 @@ function createPost() {
     .then(() => {
       alert("Post created successfully");
       fetchPosts();
+      document.getElementById("post-title").value = "";
+      document.getElementById("post-content").value = "";
+      document.getElementById("post-author").value = "";
     });
 }
