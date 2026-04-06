@@ -109,6 +109,7 @@ function logout() {
   });
 }
 
+
 function fetchPosts() {
   const filterId = Number(document.getElementById("filter-category").value);
   
@@ -123,10 +124,12 @@ function fetchPosts() {
           posts.forEach((post) => {
             let buttonsHTML = "";
             if (post.userId === currentUserId) {
+            // add additional arguments to onclick updatePost functions as they are needed for the update route. 
+            // Use single quotes so that the double quotes from the JSON string are not affected
             buttonsHTML = 
             `<div id="post-buttons">
                 <button onclick="deletePost(${post.id})">Delete</button>
-                <button onclick="updatePost(${post.id})">Update</button>
+                <button onclick='updatePost(${post.id}, ${JSON.stringify(post.title)}, ${JSON.stringify(post.content)}, ${JSON.stringify(post.postedBy)}, ${post.categoryId})'>Update</button>
               </div>`;
             }
             const div = document.createElement("div");
@@ -140,7 +143,7 @@ function fetchPosts() {
           });
         });
     }
-    // update the fetch posts url to include category filter 
+    // update the fetch posts url to include category filter  
     else{
       fetch(`http://localhost:3001/api/posts/${filterId}`, {
         method: "GET",
@@ -155,7 +158,7 @@ function fetchPosts() {
               buttonsHTML = 
               `<div id="post-buttons">
                   <button onclick="deletePost(${post.id})">Delete</button>
-                  <button onclick="updatePost(${post.id})">Update</button>
+                  <button onclick='updatePost(${post.id}, ${JSON.stringify(post.title)}, ${JSON.stringify(post.content)}, ${JSON.stringify(post.postedBy)}, ${post.categoryId})'>Update</button>
                 </div>`;
             }
             const div = document.createElement("div");
@@ -213,14 +216,12 @@ function deletePost(postId) {
 }
 
 
-function updatePost(postId) {
-  const title = document.getElementById("post-title").value;
-  const content = document.getElementById("post-content").value;
-  const category = Number(document.getElementById("post-category").value);
-  const author = document.getElementById("post-author").value;
+function updatePost(postId, postTitle, postContent, postAuthor, postCategoryId) {
+  const updateTitle = prompt("Edit title:", postTitle);
+  const updateContent = prompt("Edit content:", postContent);
 
-  if(!title || !content || !category || !author){
-    alert("Please complete all fields to update post");
+  if(!updateTitle || !updateContent){
+    alert("Please don't leave fields blank");
     return
   }
   
@@ -230,7 +231,7 @@ function updatePost(postId) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ title, content, postedBy: author, categoryId: category}),
+    body: JSON.stringify({ title: updateTitle, content: updateContent, postedBy: postAuthor, categoryId: postCategoryId}),
   })
     .then((res) => res.json())
     .then(() => {
