@@ -1,4 +1,5 @@
 let token = localStorage.getItem("authToken");
+let currentUserId = localStorage.getItem("currentUser");
 
 // create a function that fetches all the categories and places each in an option tag for the 2 dropdown lists
 function loadCategories(){
@@ -64,7 +65,14 @@ function login() {
         localStorage.setItem("authToken", data.token);
         token = data.token;
 
+        // store logged in userId
+        localStorage.setItem("currentUser", data.userData.id);
+        currentUserId = data.userData.id;        
+
         alert("User Logged In successfully");
+        
+        document.getElementById("login-email").value = "";
+        document.getElementById("login-password").value = "";
 
         // load categories for dropdown once logged in
         loadCategories();
@@ -92,6 +100,8 @@ function logout() {
     // Clear the token from the local storage as we're now logged out
     localStorage.removeItem("authToken");
     token = null;
+    localStorage.removeItem("currentUser");
+    currentUserId = null;
     document.getElementById("auth-container").classList.remove("hidden");
     document.getElementById("app-container").classList.add("hidden");
   });
@@ -99,29 +109,35 @@ function logout() {
 
 function fetchPosts() {
   const filterId = Number(document.getElementById("filter-category").value);
-  if(filterId === 0){
-    fetch("http://localhost:3001/api/posts", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((posts) => {
-        const postsContainer = document.getElementById("posts");
-        postsContainer.innerHTML = "";
-        posts.forEach((post) => {
-          const div = document.createElement("div");
-          div.innerHTML = 
-          `<h3>${post.title}</h3>
-          <p>${post.content}</p>
-          <p>Category: ${post.category.category_name}</p>
-          <small>By: ${post.postedBy} on ${new Date(post.createdOn).toLocaleString()}</small>
-          <div id="post-buttons">
-            <button onclick="deletePost()" id="deleteButton">Delete</button>
-            <button onclick="updatePost()" id="updateButton">Update</button>
-          </div>`;
-          postsContainer.appendChild(div);
+  
+    if(filterId === 0){
+      fetch("http://localhost:3001/api/posts", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((posts) => {
+          const postsContainer = document.getElementById("posts");
+          postsContainer.innerHTML = "";
+          posts.forEach((post) => {
+            let buttonsHTML = "";
+            if (post.userId === currentUserId) {
+            buttonsHTML = 
+            `<div id="post-buttons">
+                <button onclick="deletePost(${post.id})">Delete</button>
+                <button onclick="updatePost(${post.id})">Update</button>
+              </div>`;
+            }
+            const div = document.createElement("div");
+            div.innerHTML = 
+            `<h3>${post.title}</h3>
+            <p>${post.content}</p>
+            <p>Category: ${post.category.category_name}</p>
+            <small>By: ${post.postedBy} on ${new Date(post.createdOn).toLocaleString()}</small>
+            ${buttonsHTML}`;
+            postsContainer.appendChild(div);
+          });
         });
-      });
     }
     // update the fetch posts url to include category filter 
     else{
@@ -134,14 +150,21 @@ function fetchPosts() {
           const postsContainer = document.getElementById("posts");
           postsContainer.innerHTML = "";
           posts.forEach((post) => {
+            let buttonsHTML = "";
+            if (post.userId === currentUserId) {
+              buttonsHTML = 
+              `<div id="post-buttons">
+                  <button onclick="deletePost(${post.id})">Delete</button>
+                  <button onclick="updatePost(${post.id})">Update</button>
+                </div>`;
+            }
             const div = document.createElement("div");
-            div.innerHTML = `<h3>${post.title}</h3><p>${
-              post.content
-            }</p><p>Category: ${
-              post.category.category_name
-            }</p><small>By: ${post.postedBy} on ${new Date(
-              post.createdOn
-            ).toLocaleString()}</small>`;
+            div.innerHTML = 
+            `<h3>${post.title}</h3>
+            <p>${post.content}</p>
+            <p>Category: ${post.category.category_name}</p>
+            <small>By: ${post.postedBy} on ${new Date(post.createdOn).toLocaleString()}</small>
+            ${buttonsHTML}`;
             postsContainer.appendChild(div);
           });
         });
