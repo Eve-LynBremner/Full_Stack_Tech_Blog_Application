@@ -50,8 +50,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-// UDPATE the User record
-router.put("/:id", async (req, res) => {
+// UDPATE the User record - added authentication
+router.put("/:id", authMiddleware, async (req, res) => {
+  if (req.user.id !== Number(req.params.id)) {
+    return res.status(403).json({ message: "Not allowed" });
+  }
   try {
     const userData = await User.update(req.body, {
       where: {
@@ -97,7 +100,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/logout", (req, res) => {
+router.post("/logout", authMiddleware, (req, res) => {
   res.status(204).end();
 });
 
