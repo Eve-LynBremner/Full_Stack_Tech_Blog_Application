@@ -110,6 +110,8 @@ function logout() {
     token = null;
     localStorage.removeItem("currentUser");
     currentUserId = null;
+    // want it to default to load all categories after logging out, so that when log back in, the filter is clear and not on the last selection
+    loadCategories();
     document.getElementById("auth-container").classList.remove("hidden");
     document.getElementById("app-container").classList.add("hidden");
   });
