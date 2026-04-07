@@ -4,7 +4,12 @@ This is a full‑stack Tech Blog application featuring a MySQL database, and API
 
 ## Installation
 
-Follow these steps to run the application locally:
+Use the live link below to visit the deployed application:
+```sh
+https://full-stack-tech-blog.onrender.com/
+```
+
+Or follow the steps below to run the application locally:
 
 ### Clone the Repository
 Clone the repository and navigate to project folder
