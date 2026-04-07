@@ -18,7 +18,15 @@ const sequelize = process.env.DATABASE_URL
         host: process.env.DB_HOST,
         dialect: process.env.DB_DIALECT,
         port: process.env.DB_PORT,
+        // added the below as required by render and railway
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false
+          }
+        }
       }
     );
 
 module.exports = sequelize;
+
