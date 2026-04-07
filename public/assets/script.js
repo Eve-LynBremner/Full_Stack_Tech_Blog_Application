@@ -1,12 +1,18 @@
 let token = localStorage.getItem("authToken");
 let currentUserId = localStorage.getItem("currentUser");
 
+// Change API link to use correct URL depending on whether the app is running locally or on deployed service
+// local - http://localhost:3001/... 
+// deployed - https://full-stack-tech-blog.onrender.com/... 
+// the below fetches the base url of the site you are currently on, so will replace all the fetch(urls) with this using template literals
+const baseURL = window.location.origin;
+
 // create a function that fetches all the categories and places each in an option tag for the 2 dropdown lists
 function loadCategories(){
   const postCat = document.getElementById("post-category");
   const filterCat = document.getElementById("filter-category");
 
-  fetch("http://localhost:3001/api/categories", {
+  fetch(`${baseURL}/api/categories`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -31,7 +37,7 @@ function register() {
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  fetch("http://localhost:3001/api/users", {
+  fetch(`${baseURL}/api/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, email, password }),
@@ -55,7 +61,7 @@ function register() {
 function login() {
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
-  fetch("http://localhost:3001/api/users/login", {
+  fetch(`${baseURL}/api/users/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -95,7 +101,7 @@ function login() {
 }
 
 function logout() {
-  fetch("http://localhost:3001/api/users/logout", {
+  fetch(`${baseURL}/api/users/logout`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   }).then(() => {
@@ -114,7 +120,7 @@ function fetchPosts() {
   const filterId = Number(document.getElementById("filter-category").value);
   
     if(filterId === 0){
-      fetch("http://localhost:3001/api/posts", {
+      fetch(`${baseURL}/api/posts`, {
         method: "GET",
       })
         .then((res) => res.json())
@@ -145,7 +151,7 @@ function fetchPosts() {
     }
     // update the fetch posts url to include category filter  
     else{
-      fetch(`http://localhost:3001/api/posts/${filterId}`, {
+      fetch(`${baseURL}/api/posts/${filterId}`, {
         method: "GET",
       })
         .then((res) => res.json())
@@ -185,7 +191,7 @@ function createPost() {
     return
   }
   
-  fetch("http://localhost:3001/api/posts", {
+  fetch(`${baseURL}/api/posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -204,7 +210,7 @@ function createPost() {
 }
 
 function deletePost(postId) {
-  fetch(`http://localhost:3001/api/posts/${postId}`, {
+  fetch(`${baseURL}/api/posts/${postId}`, {
     method: "DELETE",
     headers: {Authorization: `Bearer ${token}`},
   })
@@ -225,7 +231,7 @@ function updatePost(postId, postTitle, postContent, postAuthor, postCategoryId) 
     return
   }
   
-  fetch(`http://localhost:3001/api/posts/${postId}`, {
+  fetch(`${baseURL}/api/posts/${postId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
